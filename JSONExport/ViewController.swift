@@ -99,6 +99,11 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
 		self.tableView.backgroundColor = .clear
     }
 
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        view.window?.delegate = self
+    }
+
     /**
      Sets the values of languagesPopup items' titles
      */
@@ -434,5 +439,13 @@ class ViewController: NSViewController, NSUserNotificationCenterDelegate, NSTabl
         cell.file = file
 
         return cell
+    }
+}
+
+// MARK: - NSWindowDelegate
+extension ViewController: NSWindowDelegate {
+    func windowShouldClose(_ sender: NSWindow) -> Bool {
+        NSApplication.shared.terminate(self)
+        return true
     }
 }
